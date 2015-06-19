@@ -12,7 +12,7 @@ AdjentMatrix = matrix(AdjentMatrix)
 
 SumAdjentMatrix = matrix(ma.zeros((16,16),dtype=int))
 
-for n in range(1,16+1):
+for n in range(3s,16+1): #valid boggle words start at three
 	SumAdjentMatrix+=AdjentMatrix**n
 	
 NPaths = sum(SumAdjentMatrix)
