@@ -11,18 +11,19 @@ def make_word_list(word_file_string):
    return word_list
 
 def main():
-    maximum_word_length = 10  #input("Enter max word length: ")
-    #maximum_word_length = int(maximum_word_length)
+    maximum_word_length = input("Enter max word length: ")
+    while type(maximum_word_length) != int and (int(maximum_word_length)<1 or int(maximum_word_length)>16 ):
+        maximum_word_length = input("please input a real integer value: ")
+    
+    maximum_word_length = int(maximum_word_length)
     board = sampleBoard.board
-    board = unravel_board(board)
+    board = unravel_board(enter_boggle_board()) #change this soon
     #words have an n+1 length for an n length path
     word_list = truncate_word_list(make_word_list('words'),maximum_word_length-1)
-
-    #print("board unraveled")
+    
+    #make the graph
     adj = build_adjacency_list(board)
-    #print("Adjacecny List made")
     G = nx.parse_adjlist(adj)
-    #print("Graph made")
     substring_paths = find_valid_paths(G,board,maximum_word_length)
     substrings = remove_duplicate_strings(parse_result_paths(substring_paths,board))
     valid_words = check_substrings_for_words(word_list,substrings)

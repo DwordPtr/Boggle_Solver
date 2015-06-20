@@ -1,6 +1,6 @@
 import math
 import networkx as nx
-"""Convert the board from a 2d list to a 1d lis """
+"""Convert the board from a 2d list to a 1d list """
 def unravel_board(original_board):
    new_board = [] 
    for i in range(len(original_board)):
@@ -104,11 +104,11 @@ def truncate_word_list(word_list,n):
    return truncated_word_list
 
 """Take user input into 2d boggle board """
-def enter_boggle_board():
+def enter_boggle_board(side_length=4):
    board = []
-   for y in range(4):
+   for y in range(side_length):
       row = []
-      for x in range(4):
+      for x in range(side_length):
         board_index = input("enter index row: "+str(x)+" col: "+str(y)+": ")
         row.append(board_index)
       
