@@ -7,7 +7,7 @@ def make_word_list(word_file_string):
    word_file = open(word_file_string)
    word_list = word_file.read()
    word_list = word_list.split('\n')
-
+   
    return word_list
 
 def main():
