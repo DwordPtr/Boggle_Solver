@@ -1,6 +1,6 @@
 import math
 import networkx as nx
-"""take a 2d list and return a 1d list with index s 0 - n-1 """
+"""Convert the board from a 2d list to a 1d lis """
 def unravel_board(original_board):
    new_board = [] 
    for i in range(len(original_board)):
@@ -8,7 +8,13 @@ def unravel_board(original_board):
          new_board.append(original_board[i][j])
    return new_board
 
-"""take a 1d list and treat it as a row major 2d array to build an adjacencyList """
+   
+   
+#This approach may look convoluted but its easier to do the math this way then crawl the list
+#Its possible to scale to n dimmensions but given the combonatorical nature of the problem
+#it'll become intractible fast
+
+"""take a 1d list and treat it as a row major 2d array to build an adjacencyList""" 
 def build_adjacency_list(board):
    board_length = len(board)
    side_length = math.sqrt(board_length)
@@ -56,14 +62,15 @@ def build_adjacency_list(board):
       lines.append(line)
    
    return lines
-"""return a list of valid substrings of length n """
-def find_valid_paths(Graph,board,length):
+"""Parse the graph for all paths of length n"""
+def find_valid_paths(Graph,board,length): # path of len(n) has a string of len(n+1)
    results = []
    for paths in (nx.all_simple_paths(Graph,source_node,target_node,length) for target_node in Graph.nodes_iter() for source_node in Graph.nodes_iter()):
       results+=paths
    
    return results
 
+"""take the paths and convert them to strings"""
 def parse_result_paths(path_list,board):
    strings = []
    for path in range(len(path_list)):
@@ -75,7 +82,8 @@ def parse_result_paths(path_list,board):
       strings.append(string)
 
    return strings
-            
+
+"""run through the list and remove any duplicate strings """            
 def remove_duplicate_strings(substrings):
    seen = set()
    result = []
@@ -86,22 +94,16 @@ def remove_duplicate_strings(substrings):
    
    return result
 
+"""Remove words less than three in length """
 def truncate_word_list(word_list,n):
    truncated_word_list = []
    for word in word_list:
-      if len(word) <= n and len(word) >=3: #boggle only allows word_len >=3
+      if len(word) >=3: #boggle only allows word_len >=3
          truncated_word_list.append(word)
    
    return truncated_word_list
-def check_substrings_for_words(word_list,substrings):
-   valid_words = []
-   for word_candidate in substrings:
-      for word in word_list:
-         if word_candidate == word:
-            valid_words.append(word_candidate)
 
-   return valid_words
-
+"""Take user input into 2d boggle board """
 def enter_boggle_board():
    board = []
    for y in range(4):
@@ -114,7 +116,7 @@ def enter_boggle_board():
    
    return board
 
-#make this main search
+"""searches substrings from valid words agains the list """
 def check_substrings_for_words(word_list,substrings):
    valid_words = []
    substrings.sort()

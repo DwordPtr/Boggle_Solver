@@ -15,7 +15,8 @@ def main():
     #maximum_word_length = int(maximum_word_length)
     board = sampleBoard.board
     board = unravel_board(board)
-    word_list = truncate_word_list(make_word_list('words'),maximum_word_length)
+    #words have an n+1 length for an n length path
+    word_list = truncate_word_list(make_word_list('words'),maximum_word_length-1)
 
     #print("board unraveled")
     adj = build_adjacency_list(board)
