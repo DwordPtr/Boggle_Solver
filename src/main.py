@@ -24,7 +24,7 @@ def main():
     #print("Graph made")
     substring_paths = find_valid_paths(G,board,maximum_word_length)
     substrings = remove_duplicate_strings(parse_result_paths(substring_paths,board))
-    valid_words = check_substrings_for_words_bin(word_list,substrings)
+    valid_words = check_substrings_for_words(word_list,substrings)
     print(len(valid_words))
     for word in valid_words:
        print(word)

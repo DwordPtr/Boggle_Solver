@@ -115,7 +115,7 @@ def enter_boggle_board():
    return board
 
 #make this main search
-def check_substrings_for_words_revised(word_list,substrings):
+def check_substrings_for_words(word_list,substrings):
    valid_words = []
    substrings.sort()
    sub_i = 0
@@ -135,43 +135,3 @@ def check_substrings_for_words_revised(word_list,substrings):
          sub_i+=1
 
    return valid_words
-
-
-def check_substrings_for_words_bin(word_list,substrings):
-   valid_words = []
-   for substring in substrings:
-      imax = len(word_list) - 1
-      imin = 0
-      while imax >= imin:
-         imid = int((imax+imin)/2)
-         if substring == word_list[imid]:
-            valid_words.append(substring)
-            break
-
-         elif substring < word_list[imid]:
-            imax = imid - 1
-
-         else: 
-            imin = imid + 1
-
-   return valid_words
-   
-def check_substrings_for_words_bin_2(word_list,substrings):
-   valid_words = []
-   for word in word_list:
-      imax = len(substrings) - 1
-      imin = 0
-      while imax >= imin:
-         imid = int((imax+imin)/2)
-         if word == substrings[imid]:
-            valid_words.append(word)
-            break
-
-         elif word < substrings[imid]:
-            imax = imid - 1
-
-         else:
-            imin = imid+1
-
-   return valid_words
-
