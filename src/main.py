@@ -16,10 +16,11 @@ def main():
         maximum_word_length = input("please input a real integer value: ")
     
     maximum_word_length = int(maximum_word_length)
-    board = sampleBoard.board
-    board = unravel_board(enter_boggle_board()) #change this soon
+    board = random_board_2d()
+    display_2d_board(board)
+    board = unravel_board(board) #change this soon
     #words have an n+1 length for an n length path
-    word_list = truncate_word_list(make_word_list('words'),maximum_word_length-1)
+    word_list = truncate_word_list(make_word_list('word_lists/words'),maximum_word_length-1)
     
     #make the graph
     adj = build_adjacency_list(board)

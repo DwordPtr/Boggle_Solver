@@ -1,4 +1,5 @@
 import math
+import random
 import networkx as nx
 """Convert the board from a 2d list to a 1d list """
 def unravel_board(original_board):
@@ -137,3 +138,33 @@ def check_substrings_for_words(word_list,substrings):
          sub_i+=1
 
    return valid_words
+   
+def random_board_2d(length=4):
+    board = []
+    for y in range(length):
+         row = []
+         for i in range(length):
+             row.append(chr(random.randrange(ord('a'),ord('z')+1)))
+         board.append(row)
+    return board
+
+def random_baord_1d(length=4):
+    board = []
+    for i in range(length**2):
+        board.append(chr(random.randrange(ord('a'),ord('z')+1)))
+            
+def display_1d_board(board):
+    for i in range(len(board)):
+        if i%3 == 0:
+            print(board[i])
+        else:
+            print(board[i],end='  ')
+            
+def display_2d_board(board):
+    for x in range(len(board)):
+        for y in range(len(board[x])):
+            print(board[x][y], end= '   ')
+        print()
+              
+
+    
