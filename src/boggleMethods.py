@@ -1,6 +1,12 @@
 import math
 import random
 import networkx as nx
+"""Check 2d board for validitiy """
+def is_valid_2d_board(board_cand):
+    for col in board_cand:
+        if len(col) != len(board_cand):
+            return False
+    return True
 """Convert the board from a 2d list to a 1d list """
 def unravel_board(original_board):
    new_board = [] 
@@ -8,8 +14,6 @@ def unravel_board(original_board):
       for j in range(len(original_board[i])):
          new_board.append(original_board[i][j])
    return new_board
-
-   
    
 #This approach may look convoluted but its easier to do the math this way then crawl the list
 #Its possible to scale to n dimmensions but given the combonatorical nature of the problem
@@ -138,7 +142,8 @@ def check_substrings_for_words(word_list,substrings):
          sub_i+=1
 
    return valid_words
-   
+
+""" Generate a random board as a 2d list"""  
 def random_board_2d(length=4):
     board = []
     for y in range(length):
@@ -148,18 +153,21 @@ def random_board_2d(length=4):
          board.append(row)
     return board
 
+"""Generate a random oard as a 1d list"""
 def random_baord_1d(length=4):
     board = []
     for i in range(length**2):
         board.append(chr(random.randrange(ord('a'),ord('z')+1)))
-            
+
+"""display a 1d board """            
 def display_1d_board(board):
     for i in range(len(board)):
         if i%3 == 0:
             print(board[i])
         else:
             print(board[i],end='  ')
-            
+
+"""display a 2d board """
 def display_2d_board(board):
     for x in range(len(board)):
         for y in range(len(board[x])):
