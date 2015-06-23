@@ -76,7 +76,7 @@ def find_valid_paths(Graph,board,length): # path of len(n) has a string of len(n
    for paths in (nx.all_simple_paths(Graph,source_node,target_node,length) for target_node in Graph.nodes_iter() for source_node in Graph.nodes_iter()):
       for path in paths:
         path = ''.join(path)
-        if len(path>=2): #valid boggle word is 3
+        if len(path)>=3: #valid boggle word is 3
             results.append(path)
    
    return results

@@ -20,7 +20,7 @@ def main():
     display_2d_board(board)
     board = unravel_board(board) #change this soon
     #words have an n+1 length for an n length path
-    word_list = truncate_word_list(make_word_list('word_lists/words'),maximum_word_length-1)
+    word_list = make_word_list('word_lists/words')
     
     #make the graph
     adj = build_adjacency_list(board)
