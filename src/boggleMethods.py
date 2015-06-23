@@ -22,12 +22,14 @@ def unravel_board(original_board):
 """take a 1d list and treat it as a row major 2d array to build an adjacencyList""" 
 def build_adjacency_list(board):
    board_length = len(board)
-   side_length = math.sqrt(board_length)
+   side_length = int(math.sqrt(board_length))
+   if side_length != math.sqrt(board_length):
+       raise ValueError("board is not square!")
    lines = []
    #build a list of lists with index numbers as the first elements of each member list
    for i in range(len(board)):
       line = ""
-      line +=str(i)
+      line +=board[i]
       line+=" "
       above = False
       below = False
@@ -36,32 +38,32 @@ def build_adjacency_list(board):
       #after appending the vertex number check for adjacent nodes
       if (i-side_length) >=0 : # above
          above = True
-         line+=str(int(i-side_length))
+         line+=board[(i-side_length)]
          line +=" "
       if(i+side_length) < board_length: #below
          below = True
-         line+=str(int(i+side_length))
+         line+=board[(i+side_length)]
          line+=" "
       if(i+1) % side_length != 0 : #right
          right = True
-         line+=str(int(i+1))
+         line+=board[(i+1)]
          line+=" "
       if i % side_length !=0: #left
          left = True
-         line+=str(int(i-1))
+         line+=board[(i-1)]
          line+= " "
       #now for the corners
       if left and above:
-         line+=str(int((i-side_length) - 1))
+         line+=board[((i-side_length) - 1)]
          line+=" "
       if right and above:
-         line+=str(int((i-side_length) + 1))
+         line+=board[((i-side_length) + 1)]
          line+=" "
       if left and below :
-         line+=str(int((i + side_length) - 1))
+         line+=board[((i + side_length) - 1)]
          line+=" "
       if right and below:
-         line+=str(int((i + side_length) + 1))
+         line+=board[((i + side_length) + 1)]
          line+=" "
       
       lines.append(line)
@@ -70,25 +72,16 @@ def build_adjacency_list(board):
 """Parse the graph for all paths of length n"""
 def find_valid_paths(Graph,board,length): # path of len(n) has a string of len(n+1)
    results = []
+   substring = ""
    for paths in (nx.all_simple_paths(Graph,source_node,target_node,length) for target_node in Graph.nodes_iter() for source_node in Graph.nodes_iter()):
-      results+=paths
+      for path in paths:
+        path = ''.join(path)
+        if len(path>=2): #valid boggle word is 3
+            results.append(path)
    
    return results
 
-"""take the paths and convert them to strings"""
-def parse_result_paths(path_list,board):
-   strings = []
-   for path in range(len(path_list)):
-      chars = []
-      for node_num in range(len(path_list[path])):
-         chars.append(board[int(path_list[path][node_num])])
-         string = ''.join(chars)
-      
-      strings.append(string)
-
-   return strings
-
-"""run through the list and remove any duplicate strings """            
+"""run through the list and remove any duplicate strings """
 def remove_duplicate_strings(substrings):
    seen = set()
    result = []
@@ -98,15 +91,6 @@ def remove_duplicate_strings(substrings):
          result.append(item)
    
    return result
-
-"""Remove words less than three in length """
-def truncate_word_list(word_list,n):
-   truncated_word_list = []
-   for word in word_list:
-      if len(word) >=3: #boggle only allows word_len >=3
-         truncated_word_list.append(word)
-   
-   return truncated_word_list
 
 """Take user input into 2d boggle board """
 def enter_boggle_board(side_length=4):

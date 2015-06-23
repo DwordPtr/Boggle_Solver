@@ -25,8 +25,7 @@ def main():
     #make the graph
     adj = build_adjacency_list(board)
     G = nx.parse_adjlist(adj)
-    substring_paths = find_valid_paths(G,board,maximum_word_length)
-    substrings = remove_duplicate_strings(parse_result_paths(substring_paths,board))
+    substrings = find_valid_paths(G,board,maximum_word_length)
     valid_words = check_substrings_for_words(word_list,substrings)
     print(len(valid_words))
     for word in valid_words:
