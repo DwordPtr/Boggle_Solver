@@ -148,24 +148,12 @@ def random_board_2d(length=4):
     board = []
     for y in range(length):
          row = []
+         a_num = ord('a')
+         z_num = ord('z')
          for i in range(length):
-             row.append(chr(random.randrange(ord('a'),ord('z')+1)))
+             row.append(chr(random.randrange(a_num,z_num+1)))
          board.append(row)
     return board
-
-"""Generate a random oard as a 1d list"""
-def random_baord_1d(length=4):
-    board = []
-    for i in range(length**2):
-        board.append(chr(random.randrange(ord('a'),ord('z')+1)))
-
-"""display a 1d board """            
-def display_1d_board(board):
-    for i in range(len(board)):
-        if i%3 == 0:
-            print(board[i])
-        else:
-            print(board[i],end='  ')
 
 """display a 2d board """
 def display_2d_board(board):
